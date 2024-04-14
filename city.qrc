@@ -1,2 +1,6 @@
-<!DOCTYPE RCC>
-<RCC version="1.0"/>
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>citycode.json</file>
+        <file>user_info.txt</file>
+    </qresource>
+</RCC>

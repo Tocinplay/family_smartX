@@ -1,2 +1,41 @@
-<!DOCTYPE RCC>
-<RCC version="1.0"/>
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>image/1.jfif</file>
+        <file>image/1.jpg</file>
+        <file>image/2.jpg</file>
+        <file>image/3.jpg</file>
+        <file>image/cat_meme.jpg</file>
+        <file>image/z87vow.jpg</file>
+        <file>image/air0.png</file>
+        <file>image/air1.png</file>
+        <file>image/air2.png</file>
+        <file>image/bulb1.jfif</file>
+        <file>image/bulb2.jfif</file>
+        <file>image/fan.png</file>
+        <file>image/fan1.png</file>
+        <file>image/temperature.png</file>
+    </qresource>
+    <qresource prefix="/new/prefix3">
+        <file>logo/mainlogo.png</file>
+        <file>logo/wea1.png</file>
+        <file>logo/wea2.png</file>
+    </qresource>
+    <qresource prefix="/new/prefix2">
+        <file>gif/icons8-haze.gif</file>
+        <file>gif/icons8-heavy-rain.gif</file>
+        <file>gif/icons8-light-rain.gif</file>
+        <file>gif/icons8-light-snow.gif</file>
+        <file>gif/icons8-partly-cloudy-day.gif</file>
+        <file>gif/icons8-rain.gif</file>
+        <file>gif/icons8-rain-cloud.gif</file>
+        <file>gif/icons8-rainfall.gif</file>
+        <file>gif/icons8-snow.gif</file>
+        <file>gif/icons8-snow-storm.gif</file>
+        <file>gif/icons8-storm.gif</file>
+        <file>gif/icons8-sun.gif</file>
+        <file>gif/icons8-wind.gif</file>
+        <file>gif/icons8-windy-weather.gif</file>
+        <file>gif/icons8-cloud-48.png</file>
+        <file>gif/icons8-cloud.gif</file>
+    </qresource>
+</RCC>

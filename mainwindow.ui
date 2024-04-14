@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>911</width>
-    <height>650</height>
+    <width>560</width>
+    <height>500</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
@@ -17,29 +23,50 @@
    <property name="styleSheet">
     <string notr="true">background-color: rgba(0, 0, 0, 0);</string>
    </property>
-   <widget class="blur_background" name="widget" native="true">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>1000</width>
-      <height>600</height>
-     </rect>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>911</width>
-     <height>26</height>
-    </rect>
-   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="blur_background" name="widget" native="true">
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="1" column="1">
+        <widget class="InteractiveButtonBase" name="btn_smarthome">
+         <property name="text">
+          <string>智能家居</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="InteractiveButtonBase" name="btn_music">
+         <property name="text">
+          <string>音乐播放器</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="InteractiveButtonBase" name="btn_livevideo">
+         <property name="text">
+          <string>摄像模块</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="InteractiveButtonBase" name="btn_weather">
+         <property name="text">
+          <string>天气预报</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>InteractiveButtonBase</class>
+   <extends>QPushButton</extends>
+   <header location="global">interactive_buttons/interactivebuttonbase.h</header>
+  </customwidget>
   <customwidget>
    <class>blur_background</class>
    <extends>QWidget</extends>

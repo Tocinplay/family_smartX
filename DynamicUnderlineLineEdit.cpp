@@ -66,7 +66,7 @@ void DynamicUnderlineLineEdit::outFocus()
 void DynamicUnderlineLineEdit::paintEvent(QPaintEvent *event)
 {
     QLineEdit::paintEvent(event);
-    QPainter painter = QPainter(this);
+    QPainter painter(this);
     painter.setRenderHint(QPainter::RenderHint::Antialiasing); // 抗锯齿
     painter.setPen(inactive_pen); // 设置画笔颜色和线条样式
     painter.drawLine(0, height() - inactive_pen.width(),width(), height() - inactive_pen.width()); // 在底部画未选中时的线条

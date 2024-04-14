@@ -1,7 +1,8 @@
 QT       += core gui
 QT += winextras
-
-
+QT += network
+QT += multimedia
+QT += multimediawidgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -19,19 +20,52 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    DynamicUnderlineLineEdit.cpp \
     blur_background.cpp \
+    interactive_buttons/interactivebuttonbase.cpp \
+    interactive_buttons/waterfloatbutton.cpp \
+    interactive_buttons/waterzoombutton.cpp \
+    interactive_buttons/winclosebutton.cpp \
+    interactive_buttons/winmaxbutton.cpp \
+    interactive_buttons/winminbutton.cpp \
+    interactive_buttons/winrestorebutton.cpp \
+    login.cpp \
     main.cpp \
     mainwindow.cpp \
+    musicplayer.cpp \
+    photomodule.cpp \
+    smarthome.cpp \
+    weather_forcecast.cpp \
     widget.cpp
 
 HEADERS += \
+    DynamicUnderlineLineEdit.h \
     blur_background.h \
+    interactive_buttons/interactivebuttonbase.h \
+    interactive_buttons/waterfloatbutton.h \
+    interactive_buttons/waterzoombutton.h \
+    interactive_buttons/winclosebutton.h \
+    interactive_buttons/winmaxbutton.h \
+    interactive_buttons/winminbutton.h \
+    interactive_buttons/winrestorebutton.h \
+    login.h \
     mainwindow.h \
+    musicinfo.h \
+    musicplayer.h \
+    photomodule.h \
+    smarthome.h \
+    weather_forcecast.h \
+    weatherday.h \
     widget.h
 
 FORMS += \
     blur_background.ui \
-    mainwindow.ui
+    login.ui \
+    mainwindow.ui \
+    musicplayer.ui \
+    photomodule.ui \
+    smarthome.ui \
+    weather_forcecast.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -39,4 +73,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
+    city.qrc  \
     image.qrc
+
+
+DISTFILES +=

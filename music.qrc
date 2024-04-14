@@ -1,2 +1,7 @@
-<!DOCTYPE RCC>
-<RCC version="1.0"/>
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>music/千本樱.mp3</file>
+        <file>music/深海少女.mp3</file>
+        <file>music/世界第一公主殿下.mp3</file>
+    </qresource>
+</RCC>
