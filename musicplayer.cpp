@@ -12,36 +12,36 @@ MusicPlayer::MusicPlayer(QWidget *parent) :
 
         this->socket = new QTcpSocket(this);
 
-        QLabel *statu = new QLabel("未连接",this);
-        //ui->statusbar->addWidget(statu);
-        this->setWindowTitle("客户端");
-        ui->host_ip->setText("192.168.20.189");//设置默认地址
-        ui->lineEdit_ports->setText("20000");//设置默认端口
+//        QLabel *statu = new QLabel("未连接",this);
+//        //ui->statusbar->addWidget(statu);
+//        this->setWindowTitle("客户端");
+//        ui->host_ip->setText("192.168.20.189");//设置默认地址
+//        ui->lineEdit_ports->setText("20000");//设置默认端口
 
-        //连接按钮
-        connect(ui->btn_connect,&QPushButton::clicked,this,[=](){
-            QString adress = ui->host_ip->text();
-            unsigned int port_num = ui->lineEdit_ports->text().toUInt();
-            this->socket->connectToHost(adress,port_num);//连接服务器，但是不一定能连上
-        });
+//        //连接按钮
+//        connect(ui->btn_connect,&QPushButton::clicked,this,[=](){
+//            QString adress = ui->host_ip->text();
+//            unsigned int port_num = ui->lineEdit_ports->text().toUInt();
+//            this->socket->connectToHost(adress,port_num);//连接服务器，但是不一定能连上
+//        });
 
-        //如果连接成功会触发 connected
-        connect(this->socket,&QTcpSocket::connected,this,[=](){
+//        //如果连接成功会触发 connected
+//        connect(this->socket,&QTcpSocket::connected,this,[=](){
 
-            statu->setText("已连接");
-        });
-        connect(ui->btn_disconnect,&QPushButton::clicked,this->socket,&QTcpSocket::disconnectFromHost);
+//            statu->setText("已连接");
+//        });
+//        connect(ui->btn_disconnect,&QPushButton::clicked,this->socket,&QTcpSocket::disconnectFromHost);
 
-        //断开连接 触发 disconnected
-        connect(this->socket,&QTcpSocket::disconnected,this,[=](){
-            this->socket->close();
-            statu->setText("未连接");
+//        //断开连接 触发 disconnected
+//        connect(this->socket,&QTcpSocket::disconnected,this,[=](){
+//            this->socket->close();
+//            statu->setText("未连接");
 
-        });
-        connect(this->socket,&QTcpSocket::readyRead,this,[=](){
-            QByteArray data = this->socket->readAll();
-//            if(data == "播放" )
-        });
+//        });
+//        connect(this->socket,&QTcpSocket::readyRead,this,[=](){
+//            QByteArray data = this->socket->readAll();
+////            if(data == "播放" )
+//        });
 
     //---------------------------------------------------------------------------------------------------------------------------
     this->player = new QMediaPlayer(this);
@@ -94,7 +94,9 @@ MusicPlayer::MusicPlayer(QWidget *parent) :
     // 设置 QMediaPlayer 和 QSlider 的连接关系
     //通过歌曲时间设置最大音量范围
     connect(player, &QMediaPlayer::durationChanged, this, [&](){
+
         int select = ui->music_list_3->currentRow();
+//        ui->label_5->setPixmap(QPixmap(saveList.at(select).img1v1Url));
         QString lyric = this->saveList.at(select).mlyric;
         qDebug()<< lyric;
         lyricsprintf(lyric);
@@ -163,7 +165,7 @@ MusicPlayer::MusicPlayer(QWidget *parent) :
             // 将毫秒表示的时间转换为分钟、秒和毫秒
             qint64 currentPositionInMilliseconds = position;
             qint64 totalDurationInMilliseconds = duration;
-            qDebug()<<position<<"a"<<duration;
+//            qDebug()<<position<<"a"<<duration;
             // 更新时间标签的文本
             QString currentTimeString = QTime(0, 0).addMSecs(currentPositionInMilliseconds).toString("mm:ss.zzz");//实时时间
             QString totalTimeString = QTime(0, 0).addMSecs(totalDurationInMilliseconds).toString("mm:ss.zzz");
@@ -457,7 +459,7 @@ void MusicPlayer::sendRequest_lyric(musicinfo *music)
 //保存播放列表歌曲到文件之中
 void MusicPlayer::saveFile(QList<musicinfo> &saveList)
 {
-    QFile file("G:\\qt\\AAA_QT\\final\\family_smartX\\musicinfo.json");
+    QFile file("./musicinfo.json");
        if (!file.open(QIODevice::WriteOnly | QIODevice::Truncate))
        {
            QMessageBox::critical(this, "写入歌曲列表", "写入失败");
@@ -486,7 +488,7 @@ void MusicPlayer::saveFile(QList<musicinfo> &saveList)
 //从文件之中读取歌曲到列表之中
 void MusicPlayer::readFromFile(QList<musicinfo> &saveList)
 {
-    QFile file("G:\\qt\\AAA_QT\\final\\family_smartX\\musicinfo.json");
+    QFile file("./musicinfo.json");
        if (!file.open(QIODevice::ReadOnly))
        {
            QMessageBox::critical(this, "加载歌曲列表", "加载失败");

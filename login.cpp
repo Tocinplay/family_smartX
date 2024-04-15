@@ -91,7 +91,7 @@ login::login(QWidget *parent) :
 
     connect(close_btn,&WinCloseButton::clicked,this,&login::close);  //绑定关闭按钮
     this->setAttribute(Qt::WA_DeleteOnClose);
-    file.setFileName(":/new/prefix1/user_info.txt");
+    file.setFileName("./user_info.txt");
     qDebug() << QDir::currentPath();
 
     //注册按钮
@@ -134,57 +134,40 @@ login::login(QWidget *parent) :
         dlg->setAttribute(Qt::WA_DeleteOnClose);
         connect(yes,&QPushButton::clicked,this,[&](){
 
-            QString s1 = l1->text();
-            if(s1.length()<6)
-            {
-                QMessageBox::critical(this,"失败","账号不能少于6位");
-                return;
-            }
-            QString s2 = l2->text();
-            QString s3 = l3->text();
-            if(s2 != s3)
-            {
-                QMessageBox::information(dlg,"注册","两次密码输入不一致，请重新输入");
-                return;
-            }
-            else{
-                if(!file.open(QIODevice::ReadOnly))
-                {
-                    QMessageBox::critical(this,"失败","无法打开文件");
+            QString username = l1->text();
+                QString password = l2->text();
+                QString confirmPassword = l3->text();
+
+                if (username.length() < 6) {
+                    QMessageBox::critical(this, "失败", "账号不能少于6位");
                     return;
                 }
-                while(!file.atEnd())
-                {
-                    QByteArray data = file.readLine();
-                    QString info = data;
-                    int ipos = info.indexOf('\t');
-                    QString value = info.mid(0,ipos);
-                    qDebug()<<value;
-                    if(ui->lineEdit_user->text() == value)
-                    {
-                        //找到账号密码登录成功
-                        qDebug()<<"账号已存在";
+
+                if (password != confirmPassword) {
+                    QMessageBox::information(dlg, "注册", "两次密码输入不一致，请重新输入");
+                    return;
+                }
+
+//                QFile file("path/to/your/file.txt"); // 替换为您的文件路径
+                if (!file.open(QIODevice::ReadWrite | QIODevice::Text)) {
+                    QMessageBox::critical(this, "失败", "无法打开文件");
+                    return;
+                }
+
+                QTextStream in(&file);
+                while (!in.atEnd()) {
+                    QString line = in.readLine();
+                    QStringList parts = line.split('\t');
+                    if (parts.size() >= 2 && parts[0] == username) {
                         file.close();
-                        QMessageBox::information(dlg,"注册","账号已存在，请重新注册");
-                        l1->clear();
-                        l2->clear();
-                        l3->clear();
+                        QMessageBox::information(dlg, "注册", "账号已存在，请重新注册");
                         return;
                     }
                 }
-                file.close();
-                if(!file.open(QIODevice::Append | QIODevice::Text))
-                {
-                    QMessageBox::critical(this,"失败","无法打开文件");
-                    return;
-                }
-                QString user = s1 + '\t' + s2 ;
-                QByteArray data = user.toUtf8();
-                file.write(data);
-                file.write("\r\n");
+
+                in << username << '\t' << password << endl;
                 file.close();
                 dlg->close();
-            }
 
         });
         connect(no,&QPushButton::clicked,dlg,&QDialog::close);
@@ -213,8 +196,9 @@ login::login(QWidget *parent) :
             int ipos = info.indexOf('\t');
             QString value = info.mid(0,ipos);
             QString key = info.mid(ipos+1);
-            key = key.replace("\r\r\n","");
-//            qDebug()<<value<<"-"<<key;
+            qDebug()<<"mima"<<key;
+            key = key.replace("\r\n","");
+            qDebug()<<value<<"-"<<key;
             if(ui->lineEdit_user->text() == value && ui->lineEdit_pswd->text() == key)
             {
                 //找到账号密码登录成功
