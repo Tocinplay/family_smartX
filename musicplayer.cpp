@@ -40,7 +40,7 @@ MusicPlayer::MusicPlayer(QWidget *parent) :
 //        });
 //        connect(this->socket,&QTcpSocket::readyRead,this,[=](){
 //            QByteArray data = this->socket->readAll();
-////            if(data == "播放" )
+//            if(data == "播放" )
 //        });
 
     //---------------------------------------------------------------------------------------------------------------------------
@@ -103,6 +103,7 @@ MusicPlayer::MusicPlayer(QWidget *parent) :
         ui->progress_bar->setRange(0,player->duration());
     });
 
+    QListWidgetItem *prelyr= nullptr;//记录前一项歌词
     //通过位置改变设置滑块的值
     connect(player, &QMediaPlayer::positionChanged, [&](qint64 position){
         qint64 duration = player->duration(); // 获取歌曲总时长
@@ -116,6 +117,7 @@ MusicPlayer::MusicPlayer(QWidget *parent) :
             /*--------------------实现自动歌词自动滚动-------------------------*/
             // 遍历歌词列表，找到对应的歌词项
             QListWidgetItem* highlightedItem = nullptr;
+            QListWidgetItem* prevItem = nullptr;
             // 创建正常大小的字体
             QFont normalFont;
             normalFont.setPointSize(10); // 设置正常字体大小
@@ -124,40 +126,42 @@ MusicPlayer::MusicPlayer(QWidget *parent) :
             QFont highlightedFont;
             highlightedFont.setPointSize(14); // 设置大字体大小
 
-            for (int i = 0; i < ui->lyric_widget->count(); ++i) {
-                int itemTime;
-                QListWidgetItem* item = ui->lyric_widget->item(i);
-                QString lyricText = item->text();
-                for (const LyricInfo& lyric : lyricList) {
-                    if(lyricText == lyric.text)
-                    {
-                        itemTime = lyric.milliseconds; // 替换为获取歌词项对应的时间的逻辑
-                        break;
-                    }
-                }
 
-                if (position >= itemTime) {
-                    highlightedItem = item;
+            for(int i=0; i < lyricList.count(); i++)
+            {
+                if(lyricList[i].milliseconds >= position)
+                {
+                    highlightedItem = ui->lyric_widget->item(i+7);
+                    break;
                 }
             }
 
             if (highlightedItem) {
                 // 找到前一项
-                    int highlightedIndex = ui->lyric_widget->row(highlightedItem);
-                    QListWidgetItem* prevItem = nullptr;
-                    if (highlightedIndex > 0) {
-                        prevItem = ui->lyric_widget->item(highlightedIndex - 1);
-                    }
+                int highlightedIndex = ui->lyric_widget->row(highlightedItem);
+                if (highlightedIndex > 0) {
+                    prevItem = ui->lyric_widget->item(highlightedIndex - 1);
+                }
 
-                    // 将前一项的字体设置为正常大小
-                    if (prevItem) {
-                        prevItem->setFont(normalFont);
-                    }
+                // 将前一项的字体设置为正常大小
+                if (prevItem) {
+                    prevItem->setFont(normalFont);
+
+                }
                 // 将当前项居中显示
-
                 ui->lyric_widget->scrollToItem(highlightedItem, QAbstractItemView::PositionAtCenter);
                 ui->lyric_widget->setCurrentItem(highlightedItem);
                 highlightedItem->setFont(highlightedFont);
+                //此处注释掉的代码为是双击歌词跳转播放后，恢复跳转之前歌曲的大小
+//                if(prelyr != prevItem)
+//                {
+//                    int row = ui->lyric_widget->row(prelyr);
+//                    if(row >= 8)
+//                    {
+//                        prelyr->setFont(normalFont);
+//                    }
+//                }
+                prelyr = highlightedItem;
             }
 
 
@@ -281,15 +285,33 @@ MusicPlayer::MusicPlayer(QWidget *parent) :
     //    connect(this->http_lyric,&QNetworkAccessManager::finished, this,&MusicPlayer::handle_lyric);
     //通过歌词改变播放的进度
     connect(ui->lyric_widget,&QListWidget::itemDoubleClicked,this,[=](QListWidgetItem *item){
-        QString lyricText = item->text();
-        for (const LyricInfo& lyric : lyricList) {
-            if(lyricText == lyric.text)
-            {
-                this->player->setPosition(lyric.milliseconds);
-                break;
-            }
+        QFont normalFont;
+        normalFont.setPointSize(10); // 设置正常字体大小
+        //跳转后歌词的索引
+        int row = ui->lyric_widget->row(item);
+        if(row<8)
+        {
+            this->player->setPosition(0);
         }
+        //歌词QList中的索引
+        int setrow = row - 8;
+
+        //跳转前歌词的索引
+        int index = ui->lyric_widget->row(prelyr);
+        if(index >= 8)
+        {
+            prelyr->setFont(normalFont);
+        }
+//        if(index != ui->lyric_widget->currentRow()-1)
+//        {
+
+//        }
+
+        qint64 mill = lyricList[setrow].milliseconds;
+        this->player->setPosition(mill);
     });
+
+
 }
 
 MusicPlayer::~MusicPlayer()
@@ -525,16 +547,32 @@ void MusicPlayer::lyricsprintf(QString lyrics)
     font.setPointSize(10);
 //    ui->lyric_widget->setItemHeight(50); // 设置项的高度为50像素
 //    ui->lyric_widget->styleSheet("QListWidget::item{rgba:(255,255,255,150);}");
-    QRegularExpression re("\\[(\\d{2}:\\d{2}\\.\\d{3})\\]");
+    QRegularExpression re("\\[(\\d{2}):(\\d{2})(\\.\\d{2,3})?\\]");
     QStringList lines = lyrics.split("\n", QString::SkipEmptyParts);
-    for(int i=0; i<11; i++)
+    for(int i=0; i<8; i++)
     {
         ui->lyric_widget->addItem("");
     }
     for(const QString &line: lines)
     {
-        QString time = re.match(line).captured(1);
-        QTime curtime = QTime::fromString(time,"mm:ss.zzz");
+//        QString time = re.match(line).captured(1);
+        QTime curtime;
+        QRegularExpressionMatch match = re.match(line);
+        if (match.hasMatch()) {
+            int minute = match.captured(1).toInt();
+            int second = match.captured(2).toInt();
+            int millisecond = 0;
+            if (match.lastCapturedIndex() == 3) {
+                QString millisecondStr = match.captured(3).mid(1);
+                millisecond = millisecondStr.toInt();
+                if (millisecondStr.length() == 2) {
+                    millisecond *= 10; // 将2位毫秒转换为3位毫秒
+                }
+            }
+            curtime = QTime(0, minute, second, millisecond);
+            // 使用 curtime
+        }
+
         qDebug()<<curtime.msecsSinceStartOfDay();
         QString lyrstring = line.split("]").at(1);
         QListWidgetItem *lyritem = new QListWidgetItem(lyrstring);

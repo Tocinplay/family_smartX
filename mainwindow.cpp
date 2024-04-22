@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
     weaui = new weather_forcecast;
     ui->btn_weather->setGeometry(100,100,150,100);
     ui->btn_weather->setTextColor(QColor(253,230,224));
-    ui->btn_weather->setFont(QFont("得意黑"));
+    ui->btn_weather->setFont(QFont("微软雅黑"));
     ui->btn_weather->setFontSize(23);
     connect(ui->btn_weather,&InteractiveButtonBase::clicked,this,[=](){
         this->hide();
@@ -37,7 +37,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->btn_music->setGeometry(300,100,150,100);
     ui->btn_music->setTextColor(QColor(253,230,224));
-    ui->btn_music->setFont(QFont("得意黑"));
+    ui->btn_music->setFont(QFont("微软雅黑"));
     ui->btn_music->setFontSize(20);
     musicui = new MusicPlayer;
     connect(ui->btn_music,&InteractiveButtonBase::clicked,this,[=](){
@@ -49,7 +49,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->btn_smarthome->setGeometry(300,300,150,100);
     ui->btn_smarthome->setTextColor(QColor(253,230,224));
-    ui->btn_smarthome->setFont(QFont("得意黑"));
+    ui->btn_smarthome->setFont(QFont("微软雅黑"));
     ui->btn_smarthome->setFontSize(23);
     shui = new SmartHome;
     connect(ui->btn_smarthome,&InteractiveButtonBase::clicked,this,[=](){
@@ -60,7 +60,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->btn_livevideo->setGeometry(100,300,150,100);
     ui->btn_livevideo->setTextColor(QColor(253,230,224));
-    ui->btn_livevideo->setFont(QFont("得意黑"));
+    ui->btn_livevideo->setFont(QFont("微软雅黑"));
     ui->btn_livevideo->setFontSize(23);
     smartui = new PhotoModule;
     connect(ui->btn_livevideo,&InteractiveButtonBase::clicked,this,[=](){

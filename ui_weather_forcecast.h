@@ -140,7 +140,7 @@ public:
         lineEdit_city = new DynamicUnderlineLineEdit(widget_2);
         lineEdit_city->setObjectName(QString::fromUtf8("lineEdit_city"));
         lineEdit_city->setMinimumSize(QSize(230, 40));
-        lineEdit_city->setStyleSheet(QString::fromUtf8("font: italic 20pt \"\345\276\227\346\204\217\351\273\221\";\n"
+        lineEdit_city->setStyleSheet(QString::fromUtf8("font: bold 18pt \"\345\276\256\350\275\257\351\233\205\351\273\221\";\n"
 "background-color: rgba(255, 255, 255, 130);"));
         lineEdit_city->setInputMask(QString::fromUtf8(""));
 
@@ -148,7 +148,7 @@ public:
 
         btn_search = new InteractiveButtonBase(widget_2);
         btn_search->setObjectName(QString::fromUtf8("btn_search"));
-        btn_search->setStyleSheet(QString::fromUtf8("font: italic 15pt \"\345\276\227\346\204\217\351\273\221\";"));
+        btn_search->setStyleSheet(QString::fromUtf8("font: bold 15pt \"\345\276\256\350\275\257\351\233\205\351\273\221\";"));
 
         horizontalLayout->addWidget(btn_search);
 
@@ -164,7 +164,14 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(lab_date->sizePolicy().hasHeightForWidth());
         lab_date->setSizePolicy(sizePolicy);
-        lab_date->setStyleSheet(QString::fromUtf8("font: italic 24pt \"\345\276\227\346\204\217\351\273\221\";"));
+        QFont font;
+        font.setFamily(QString::fromUtf8("\345\276\256\350\275\257\351\233\205\351\273\221"));
+        font.setPointSize(20);
+        font.setBold(true);
+        font.setItalic(false);
+        font.setWeight(75);
+        lab_date->setFont(font);
+        lab_date->setStyleSheet(QString::fromUtf8("font: 75 bold 20pt \"\345\276\256\350\275\257\351\233\205\351\273\221\";"));
         lab_date->setAlignment(Qt::AlignCenter);
 
         horizontalLayout->addWidget(lab_date);
@@ -172,7 +179,7 @@ public:
         widget_3 = new QWidget(widget);
         widget_3->setObjectName(QString::fromUtf8("widget_3"));
         widget_3->setGeometry(QRect(60, 198, 290, 371));
-        widget_3->setStyleSheet(QString::fromUtf8("font: italic 12pt \"\345\276\227\346\204\217\351\273\221\";\n"
+        widget_3->setStyleSheet(QString::fromUtf8("font:  12pt \"\345\276\256\350\275\257\351\233\205\351\273\221\";\n"
 "background-color: rgba(86, 152, 195, 200);"));
         verticalLayout = new QVBoxLayout(widget_3);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
@@ -203,14 +210,14 @@ public:
 
         lbl_low_0 = new QLabel(widget_4);
         lbl_low_0->setObjectName(QString::fromUtf8("lbl_low_0"));
-        lbl_low_0->setStyleSheet(QString::fromUtf8("font: italic 12pt \"\345\276\227\346\204\217\351\273\221\";"));
+        lbl_low_0->setStyleSheet(QString::fromUtf8(""));
         lbl_low_0->setAlignment(Qt::AlignCenter);
 
         horizontalLayout_2->addWidget(lbl_low_0);
 
         lbl_high_0 = new QLabel(widget_4);
         lbl_high_0->setObjectName(QString::fromUtf8("lbl_high_0"));
-        lbl_high_0->setStyleSheet(QString::fromUtf8("font: italic 12pt \"\345\276\227\346\204\217\351\273\221\";"));
+        lbl_high_0->setStyleSheet(QString::fromUtf8(""));
         lbl_high_0->setAlignment(Qt::AlignCenter);
 
         horizontalLayout_2->addWidget(lbl_high_0);
@@ -435,7 +442,7 @@ public:
         label = new QLabel(widget_11);
         label->setObjectName(QString::fromUtf8("label"));
         label->setGeometry(QRect(10, 10, 271, 41));
-        label->setStyleSheet(QString::fromUtf8("font: italic 15pt \"\345\276\227\346\204\217\351\273\221\";\n"
+        label->setStyleSheet(QString::fromUtf8("font: 12pt \"\345\215\216\346\226\207\350\241\214\346\245\267\";\n"
 "background-color: rgb(196, 203, 207);"));
         label->setAlignment(Qt::AlignCenter);
         widget_12 = new QWidget(widget);
@@ -452,21 +459,22 @@ public:
         lbl_city = new QLabel(widget_12);
         lbl_city->setObjectName(QString::fromUtf8("lbl_city"));
         lbl_city->setGeometry(QRect(180, 10, 211, 131));
-        QFont font;
-        font.setFamily(QString::fromUtf8("\345\276\227\346\204\217\351\273\221"));
-        font.setPointSize(36);
-        font.setBold(false);
-        font.setItalic(true);
-        font.setWeight(50);
-        lbl_city->setFont(font);
-        lbl_city->setStyleSheet(QString::fromUtf8("font: italic 36pt \"\345\276\227\346\204\217\351\273\221\";\n"
+        QFont font1;
+        font1.setFamily(QString::fromUtf8("\345\276\256\350\275\257\351\233\205\351\273\221"));
+        font1.setPointSize(36);
+        font1.setBold(true);
+        font1.setItalic(false);
+        font1.setWeight(75);
+        lbl_city->setFont(font1);
+        lbl_city->setStyleSheet(QString::fromUtf8("\n"
+"font: bold 36pt \"\345\276\256\350\275\257\351\233\205\351\273\221\";\n"
 "background-color: rgba(255, 255, 255,0);\n"
 "color: rgb(105,105,105);"));
         lbl_city->setAlignment(Qt::AlignCenter);
         lbl_temp_range = new QLabel(widget_12);
         lbl_temp_range->setObjectName(QString::fromUtf8("lbl_temp_range"));
-        lbl_temp_range->setGeometry(QRect(180, 160, 211, 51));
-        lbl_temp_range->setStyleSheet(QString::fromUtf8("font: italic 18pt \"\345\276\227\346\204\217\351\273\221\";\n"
+        lbl_temp_range->setGeometry(QRect(120, 160, 331, 51));
+        lbl_temp_range->setStyleSheet(QString::fromUtf8("font: bold 18pt \"\345\276\256\350\275\257\351\233\205\351\273\221\";\n"
 "background-color: rgb(186, 204, 217);"));
         lbl_temp_range->setAlignment(Qt::AlignCenter);
         lbl_temp = new QLabel(widget_12);
@@ -477,21 +485,22 @@ public:
         sizePolicy2.setVerticalStretch(0);
         sizePolicy2.setHeightForWidth(lbl_temp->sizePolicy().hasHeightForWidth());
         lbl_temp->setSizePolicy(sizePolicy2);
-        QFont font1;
-        font1.setFamily(QString::fromUtf8("\345\276\227\346\204\217\351\273\221"));
-        font1.setPointSize(30);
-        font1.setBold(false);
-        font1.setItalic(true);
-        font1.setWeight(50);
-        lbl_temp->setFont(font1);
-        lbl_temp->setStyleSheet(QString::fromUtf8("font: italic 30pt \"\345\276\227\346\204\217\351\273\221\";\n"
+        QFont font2;
+        font2.setFamily(QString::fromUtf8("\345\276\256\350\275\257\351\233\205\351\273\221"));
+        font2.setPointSize(30);
+        font2.setBold(true);
+        font2.setItalic(false);
+        font2.setWeight(75);
+        lbl_temp->setFont(font2);
+        lbl_temp->setStyleSheet(QString::fromUtf8("font: bold 30pt \"\345\276\256\350\275\257\351\233\205\351\273\221\";\n"
 "color: rgb(112,128,144);\n"
 "background-color: rgba(0, 255, 255, 0);"));
         lbl_temp->setAlignment(Qt::AlignCenter);
         widget_13 = new QWidget(widget);
         widget_13->setObjectName(QString::fromUtf8("widget_13"));
         widget_13->setGeometry(QRect(360, 380, 571, 191));
-        widget_13->setStyleSheet(QString::fromUtf8("background-color: rgb(196, 203, 207);"));
+        widget_13->setStyleSheet(QString::fromUtf8("font:  10pt \"\345\276\256\350\275\257\351\233\205\351\273\221\";\n"
+"background-color: rgb(186, 204, 217);"));
         horizontalLayout_9 = new QHBoxLayout(widget_13);
         horizontalLayout_9->setObjectName(QString::fromUtf8("horizontalLayout_9"));
         widget_14 = new QWidget(widget_13);
@@ -502,7 +511,7 @@ public:
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         label_7 = new QLabel(widget_14);
         label_7->setObjectName(QString::fromUtf8("label_7"));
-        label_7->setStyleSheet(QString::fromUtf8("font: italic 10pt \"\345\276\227\346\204\217\351\273\221\";\n"
+        label_7->setStyleSheet(QString::fromUtf8("font:  10pt \"\345\276\256\350\275\257\351\233\205\351\273\221\";\n"
 "background-color: rgb(186, 204, 217);"));
         label_7->setAlignment(Qt::AlignCenter);
 
@@ -515,7 +524,7 @@ public:
         sizePolicy3.setVerticalStretch(50);
         sizePolicy3.setHeightForWidth(lbl_shidu->sizePolicy().hasHeightForWidth());
         lbl_shidu->setSizePolicy(sizePolicy3);
-        lbl_shidu->setStyleSheet(QString::fromUtf8("font: italic 26pt \"\345\276\227\346\204\217\351\273\221\";"));
+        lbl_shidu->setStyleSheet(QString::fromUtf8("font: italic 23pt \"\345\276\256\350\275\257\351\233\205\351\273\221\";"));
         lbl_shidu->setAlignment(Qt::AlignCenter);
 
         verticalLayout_2->addWidget(lbl_shidu);
@@ -531,7 +540,7 @@ public:
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
         label_8 = new QLabel(widget_15);
         label_8->setObjectName(QString::fromUtf8("label_8"));
-        label_8->setStyleSheet(QString::fromUtf8("font: italic 10pt \"\345\276\227\346\204\217\351\273\221\";\n"
+        label_8->setStyleSheet(QString::fromUtf8("font:  10pt \"\345\276\256\350\275\257\351\233\205\351\273\221\";\n"
 "background-color: rgb(186, 204, 217);"));
         label_8->setAlignment(Qt::AlignCenter);
 
@@ -541,7 +550,7 @@ public:
         lbl_pm25->setObjectName(QString::fromUtf8("lbl_pm25"));
         sizePolicy3.setHeightForWidth(lbl_pm25->sizePolicy().hasHeightForWidth());
         lbl_pm25->setSizePolicy(sizePolicy3);
-        lbl_pm25->setStyleSheet(QString::fromUtf8("font: italic 26pt \"\345\276\227\346\204\217\351\273\221\";"));
+        lbl_pm25->setStyleSheet(QString::fromUtf8("font: italic 23pt \"\345\276\256\350\275\257\351\233\205\351\273\221\";"));
         lbl_pm25->setAlignment(Qt::AlignCenter);
 
         verticalLayout_3->addWidget(lbl_pm25);
@@ -557,7 +566,7 @@ public:
         verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
         label_9 = new QLabel(widget_16);
         label_9->setObjectName(QString::fromUtf8("label_9"));
-        label_9->setStyleSheet(QString::fromUtf8("font: italic 10pt \"\345\276\227\346\204\217\351\273\221\";\n"
+        label_9->setStyleSheet(QString::fromUtf8("font:  10pt \"\345\276\256\350\275\257\351\233\205\351\273\221\";\n"
 "background-color: rgb(186, 204, 217);"));
         label_9->setAlignment(Qt::AlignCenter);
 
@@ -567,7 +576,7 @@ public:
         lbl_aqi->setObjectName(QString::fromUtf8("lbl_aqi"));
         sizePolicy3.setHeightForWidth(lbl_aqi->sizePolicy().hasHeightForWidth());
         lbl_aqi->setSizePolicy(sizePolicy3);
-        lbl_aqi->setStyleSheet(QString::fromUtf8("font: italic 26pt \"\345\276\227\346\204\217\351\273\221\";"));
+        lbl_aqi->setStyleSheet(QString::fromUtf8("font: italic 23pt \"\345\276\256\350\275\257\351\233\205\351\273\221\";"));
         lbl_aqi->setAlignment(Qt::AlignCenter);
 
         verticalLayout_4->addWidget(lbl_aqi);
@@ -583,7 +592,7 @@ public:
         verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
         label_10 = new QLabel(widget_17);
         label_10->setObjectName(QString::fromUtf8("label_10"));
-        label_10->setStyleSheet(QString::fromUtf8("font: italic 10pt \"\345\276\227\346\204\217\351\273\221\";\n"
+        label_10->setStyleSheet(QString::fromUtf8("font:  10pt \"\345\276\256\350\275\257\351\233\205\351\273\221\";\n"
 "background-color: rgb(186, 204, 217);"));
         label_10->setAlignment(Qt::AlignCenter);
 
@@ -593,7 +602,7 @@ public:
         lbl_wind->setObjectName(QString::fromUtf8("lbl_wind"));
         sizePolicy3.setHeightForWidth(lbl_wind->sizePolicy().hasHeightForWidth());
         lbl_wind->setSizePolicy(sizePolicy3);
-        lbl_wind->setStyleSheet(QString::fromUtf8("font: italic 26pt \"\345\276\227\346\204\217\351\273\221\";"));
+        lbl_wind->setStyleSheet(QString::fromUtf8("font: italic 23pt \"\345\276\256\350\275\257\351\233\205\351\273\221\";"));
         lbl_wind->setAlignment(Qt::AlignCenter);
 
         verticalLayout_5->addWidget(lbl_wind);
